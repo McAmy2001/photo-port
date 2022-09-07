@@ -8,6 +8,8 @@ const categories = [
 ]
 const mockCurrentCategory = jest.fn();
 const mockSetCurrentCategory = jest.fn();
+const mockContactSelected = jest.fn();
+const mockSetContactSelected = jest.fn();
 
 afterEach(cleanup);
 
@@ -18,38 +20,46 @@ describe('Nav component', () => {
       categories={categories}
       setCurrentCategory={mockSetCurrentCategory}
       currentCategory={mockCurrentCategory}
+      contactSelected={mockContactSelected}
+      setContactSelected={mockSetContactSelected}
     />);
   });
 
   // Snapshot test
   it('matches snapshot', () => {
-    const { asFragment } = render(<Nav 
+    const { asFragment } = render(<Nav
       categories={categories}
       setCurrentCategory={mockSetCurrentCategory}
-      currentCategory={mockCurrentCategory} 
-      />);
+      currentCategory={mockCurrentCategory}
+      contactSelected={mockContactSelected}
+      setContactSelected={mockSetContactSelected}
+    />);
     expect(asFragment()).toMatchSnapshot();
   })
 });
 
 describe('Emoji is visible', () => {
   it('Inserts emoji into h2', () => {
-    const { getByLabelText } = render(<Nav 
+    const { getByLabelText } = render(<Nav
       categories={categories}
       setCurrentCategory={mockSetCurrentCategory}
-      currentCategory={mockCurrentCategory} 
-      />);
+      currentCategory={mockCurrentCategory}
+      contactSelected={mockContactSelected}
+      setContactSelected={mockSetContactSelected}
+    />);
     expect(getByLabelText('camera')).toHaveTextContent('📸');
   });
 });
 
 describe('Links are visible', () => {
   it('Inserts text into the links', () => {
-    const { getByTestId } = render(<Nav 
+    const { getByTestId } = render(<Nav
       categories={categories}
       setCurrentCategory={mockSetCurrentCategory}
       currentCategory={mockCurrentCategory}
-     />);
+      contactSelected={mockContactSelected}
+      setContactSelected={mockSetContactSelected}
+    />);
     expect(getByTestId('link')).toHaveTextContent('Oh Snap!');
     expect(getByTestId('about')).toHaveTextContent('About me');
   })
